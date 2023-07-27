@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Check on the Weather</title>
+</head>
+<body>
+    <header class="bg-green-800 h-12 text-center text-2xl text-white">
+        Let's Check the Weather
+    </header>
+    <div class="grid grid-cols-5 gap 4 p-4 h-screen bg-green-100 z-0">
+        <div class="flex-wrap col-span-1 bg-green-400 h-screen pt-4">
+            <input class="border-black border-2 w-full h-12 text-center" id="myInput" placeholder="city name">
+            <button class="rounded-full bg-green-500 w-full h-12" id="myButton">Search</button>
+            <ul class="text-center" id="fillThisUl">Search History: </ul>
+        </div>
+        
+        <!-- javascript will append to this div-->
+        <div class="grid grid-rows-2 col-span-4 h-64">
+            <ul id="weatherdisplay"class="bg-green-200 h-screen z-0"></ul>
+            <div class="grid grid-cols-5">
+        </div>
+    </div>
+
+
+    <script src="./script.js"></script>
+</body>
+</html>

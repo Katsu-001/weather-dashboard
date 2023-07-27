@@ -37,3 +37,57 @@ function cityConverter(lat, lon) {
             }
         })
     }    
+
+    // functions to save data to local storage
+    function latlonConverter(city) {
+        if(input.value != ''){
+            console.log(input.value)
+            city = input.value
+            saveToLocalStorage(city)
+            var liEl = document.createElement('li')
+            input.value = ""
+            liEl.textContent = city
+            liEl.setAttribute('id', 'searched')
+            fillableUl.appendChild(liEl)
+        }
+        city = city
+        if(city == ""){return}
+        var apiUrl = 'https://api.openweathermap.org/geo/1.0/direct?q=' + city + '&limit=5&appid=0f0f1cfbe3b125e774d9bc3e67107d8f'
+        fetch(apiUrl)
+            .then(function(response){
+                return response.json()})
+            .then(function(data){
+                var lat = data[0].lat
+                var lon = data[0].lon
+                cityConverter(lat, lon)
+            })
+    }
+
+    function saveToLocalStorage(x) {
+        localArray.push(x)
+        console.log(localArray)
+        localStorage.setItem("cityHistory", JSON.stringify(localArray))
+    }
+    
+    function initLoadLocalStorage(){
+        if(localStorage.getItem("cityHistory")) {
+            var tempArray = JSON.parse(localStorage.getItem("cityHistory"))
+            localArray = tempArray
+            for(i=0; i<tempArray.length; i++){
+                var liEl = document.createElement('li')
+                liEl.setAttribute('id', 'searched')
+                liEl.textContent = tempArray[i]
+                fillableUl.appendChild(liEl)
+            }
+        }
+    }
+    
+    initLoadLocalStorage()
+
+    document.addEventListener('click', function(e){
+        if(e.target.id == 'searched'){
+            console.log(e.target.textContent)
+            latlonConverter(e.target.textContent)
+        }
+    })
+    button.addEventListener('click', latlonConverter)

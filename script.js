@@ -17,7 +17,23 @@ function cityConverter(lat, lon) {
             }
             // apply data from fetch
             for(i=0;i<5; i++){
-                
+                var tempLi = document.createElement('li')
+                var tempIcon = document.createElement('img')
+                var tempDataDisplay = document.createElement('span')
+                var weatherData = data.list[i].weather[0].icon
+                var tempData = data.list[i].main.temp
+                var humidData = data.list[i].main.humidity
+                var windData = data.list[i].wind.speed
+                var dateData = data.list[i].dt_txt
+                tempIcon.setAttribute('src', 'https://openweathermap.org/img/wn/'+weatherData+'@2x.png')
+                tempDataDisplay.textContent =  "   Temperature: " + tempData + "   Humidity:" + humidData + " Wind Speed:"
+                + windData + " Date:  " + dateData
+                // a little tailwind styling
+                tempLi.setAttribute('class', 'flex align-items-center z-1 border-2 text-xl')
+                // append to html
+                tempLi.appendChild(tempIcon)
+                tempLi.appendChild(tempDataDisplay)
+                weatherDisplay.appendChild(tempLi)
             }
         })
     }    
